@@ -6,19 +6,19 @@ public class PalindromeCheckerApp {
        System.out.print("Input text: ");
        String text=input.nextLine();
        boolean flag=true;
-       String comptext="";
-       for(int i =text.length()-1;i>=0;i--){
-           comptext += text.charAt(i);
+       char[] chars = text.toCharArray();
+       int start =0;
+       int end = chars.length -1;
+
+       while (start<end){
+           if(chars[start]!=chars[end]){
+               flag =false;
+               break;
+           }
+            start++;
+           end--;
        }
-        for(int i=0;i<text.length();i++){
-            if (comptext.charAt(i)==text.charAt(i)){
-                continue;
-            }
-            else{
-                flag = false;
-            }
-        }
-        System.out.println("Is it a  palindrome? : "+flag);
+       System.out.println("Is it a palindrome? : "+ flag);
    }
 
 }
