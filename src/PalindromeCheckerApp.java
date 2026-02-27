@@ -1,5 +1,6 @@
 public class PalindromeCheckerApp {
     void main(String[] args) {
-        System.out.println("Hello World");
+        System.out.println("Welcome to the palindrome Checker Management System \nVersion : 1.0\nSystem initialized sucessfully.");
     }
+
 }
