@@ -7,12 +7,12 @@ public class PalindromeCheckerApp {
         System.out.print("Input text: ");
         String text = input.nextLine();
         boolean flag = true;
-        Deque<Character> deque= new ArrayDeque<>();
+        LinkedList<Character> list =new LinkedList<>();
         for(char c: text.toCharArray()){
-            deque.add(c);
+            list.add(c);
         }
-        while(deque.size()>1){
-            if(deque.removeFirst()!=deque.removeLast()){
+        while(list.size()>1){
+            if(list.removeFirst()!=list.removeLast()){
                 flag = false;
                 break;
             }
