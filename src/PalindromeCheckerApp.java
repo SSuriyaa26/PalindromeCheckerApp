@@ -19,7 +19,7 @@ class StackStrategy implements PalindromeStrategy{
 
 }
 
-class Dequeue implements PalindromeStrategy{
+class DequeueStrategy implements PalindromeStrategy{
     public boolean palindromeChecker(String s) {
         Deque<Character> deque = new ArrayDeque<>();
         for (char c : s.toCharArray()) {
@@ -36,14 +36,28 @@ class Dequeue implements PalindromeStrategy{
 }
 public class PalindromeCheckerApp {
 
-    public static void main(String[] args) {
 
-        Scanner input = new Scanner(System.in);
-        System.out.print("Input text: ");
-        String text = input.nextLine();
-        PalindromeStrategy check = new StackStrategy();
-        boolean flag = check.palindromeChecker(text);
-        System.out.println("Is it a palindrome? : "+flag);
+        public static void main(String[] args) {
+            Scanner input = new Scanner(System.in);
+            System.out.print("Input text: ");
+            String text = input.nextLine();
+
+            PalindromeStrategy stackCheck = new StackStrategy();
+        long startStack = System.nanoTime();
+        boolean stackResult = stackCheck.palindromeChecker(text);
+        long endStack = System.nanoTime();
+        long stackTime = endStack - startStack;
+
+        PalindromeStrategy dequeCheck = new DequeueStrategy();
+        long startDeque = System.nanoTime();
+        boolean dequeResult = dequeCheck.palindromeChecker(text);
+        long endDeque = System.nanoTime();
+        long dequeTime = endDeque - startDeque;
+
+        System.out.println("StackStrategy result: " + stackResult + " (time: " + stackTime + " ns)");
+        System.out.println("DequeueStrategy result: " + dequeResult + " (time: " + dequeTime + " ns)");
+
+
         input.close();
     }
 }
