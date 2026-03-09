@@ -1,19 +1,32 @@
 import java.util.*;
 
 public class PalindromeCheckerApp {
+    static class PalindromeService{
+        public boolean checker(String s){
+            int start =0;
+            int end = s.length()-1;
 
+            while(start<end){
+
+                if(s.charAt(start)!= s.charAt(end)){
+                    return false;
+                }
+                start++;
+                end--;
+            }
+
+            return true;
+
+        }
+    }
     public static void main(String[] args) {
         System.out.println("Welcome to the palindrome Checker Management System \nVersion : 1.0\nSystem initialized sucessfully.");
         Scanner input = new Scanner(System.in);
         System.out.print("Input text: ");
         String text = input.nextLine();
-        boolean flag = true;
-        String noSpaces = text.replaceAll("\\s", "");
-        String normalized = noSpaces.toLowerCase();
 
-        for(int i=0;i<normalized.length()/2;i++)     {
-         if(normalized.charAt(i)!=normalized.charAt(normalized.length()-1-i)){
-            flag=false; }}
+        PalindromeService check = new PalindromeService();
+        boolean flag = check.checker(text);
         System.out.println("Is it a palindrome? : "+flag);
         input.close();
     }
