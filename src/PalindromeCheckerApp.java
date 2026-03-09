@@ -1,32 +1,48 @@
 import java.util.*;
-
-public class PalindromeCheckerApp {
-    static class PalindromeService{
-        public boolean checker(String s){
-            int start =0;
-            int end = s.length()-1;
-
-            while(start<end){
-
-                if(s.charAt(start)!= s.charAt(end)){
-                    return false;
-                }
-                start++;
-                end--;
-            }
-
-            return true;
-
+interface  PalindromeStrategy{
+    boolean palindromeChecker(String s);
+}
+class StackStrategy implements PalindromeStrategy{
+    public boolean palindromeChecker(String s) {
+        Stack<Character> stack = new Stack<>();
+        for (char c : s.toCharArray()) {
+            stack.push(c);
         }
+        for (int i = 0; i < s.length(); i++) {
+            char popped = stack.pop();
+            if (popped != s.charAt(i)) {
+                return false;
+            }
+        }
+        return true;
     }
+
+}
+
+class Dequeue implements PalindromeStrategy{
+    public boolean palindromeChecker(String s) {
+        Deque<Character> deque = new ArrayDeque<>();
+        for (char c : s.toCharArray()) {
+            deque.addLast(c);
+        }
+        while (deque.size() > 1) {
+            if (deque.removeFirst() != deque.removeLast()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+}
+public class PalindromeCheckerApp {
+
     public static void main(String[] args) {
-        System.out.println("Welcome to the palindrome Checker Management System \nVersion : 1.0\nSystem initialized sucessfully.");
+
         Scanner input = new Scanner(System.in);
         System.out.print("Input text: ");
         String text = input.nextLine();
-
-        PalindromeService check = new PalindromeService();
-        boolean flag = check.checker(text);
+        PalindromeStrategy check = new StackStrategy();
+        boolean flag = check.palindromeChecker(text);
         System.out.println("Is it a palindrome? : "+flag);
         input.close();
     }
